@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Odds & Required Wins｜Humanity Death Game: Rock-Paper-Scissors Survival</title>
+	<link rel="stylesheet" href="styles.css" />
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-XXXXXXXXXX');  // ← Replace with your GA4 Measurement ID
+	</script>
+
+	<!-- Google AdSense Auto Ads -->
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6758111223171316"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="card">
+			<h1>Odds & Required Wins</h1>
+			<p class="lead">
+				In this game, the rule is: <b>draws keep you in the same round, only wins advance you</b>.<br>
+				With an initial population of <b>N</b>, the <b>theoretical number of wins required</b> to become the final survivor is roughly <code>ceil(log2(N))</code>.
+			</p>
+
+			<table style="width:100%;border-collapse:collapse;margin-top:20px">
+				<thead>
+					<tr style="background:#101437">
+						<th style="padding:8px;border:1px solid #2a3152">Stage Size</th>
+						<th style="padding:8px;border:1px solid #2a3152">Wins Required</th>
+						<th style="padding:8px;border:1px solid #2a3152">Victory Probability (Theory)</th>
+						<th style="padding:8px;border:1px solid #2a3152">Everyday Analogy</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="padding:8px;border:1px solid #2a3152">100 players</td>
+						<td style="padding:8px;border:1px solid #2a3152">7 wins</td>
+						<td style="padding:8px;border:1px solid #2a3152">≈ 1/128 (0.78%)</td>
+						<td style="padding:8px;border:1px solid #2a3152">Like winning a small neighborhood lottery</td>
+					</tr>
+					<tr>
+						<td style="padding:8px;border:1px solid #2a3152">10,000 players</td>
+						<td style="padding:8px;border:1px solid #2a3152">14 wins</td>
+						<td style="padding:8px;border:1px solid #2a3152">≈ 1/16,384 (0.0061%)</td>
+						<td style="padding:8px;border:1px solid #2a3152">Like being chosen as the one winner in a full Tokyo Dome</td>
+					</tr>
+					<tr>
+						<td style="padding:8px;border:1px solid #2a3152">1,000,000 players</td>
+						<td style="padding:8px;border:1px solid #2a3152">20 wins</td>
+						<td style="padding:8px;border:1px solid #2a3152">≈ 1/1,048,576 (0.000095%)</td>
+						<td style="padding:8px;border:1px solid #2a3152">Like winning a “one winner per year” campaign prize</td>
+					</tr>
+					<tr>
+						<td style="padding:8px;border:1px solid #2a3152">8,000,000,000 (Global)</td>
+						<td style="padding:8px;border:1px solid #2a3152">33 wins</td>
+						<td style="padding:8px;border:1px solid #2a3152">≈ 1/8,589,934,592</td>
+						<td style="padding:8px;border:1px solid #2a3152">Far less likely than winning the jackpot hundreds of times in a row<br>Much rarer than being struck by lightning many times over</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p class="muted" style="margin-top:12px">
+				* In actual play, draws make the number of rounds required even larger.<br>
+				* Probabilities shown are theoretical values; actual results are not guaranteed.
+			</p>
+
+			<!-- Footer -->
+			<footer class="muted" style="margin-top:28px;text-align:center;font-size:14px">
+				<a href="index.html">Back to Home</a> ｜
+				<a href="howto.html">How to Play</a> ｜
+				<a href="privacy.html">Privacy Policy</a> ｜
+				<a href="terms.html">Terms of Service</a> ｜
+				<a href="about.html">About This Site</a>
+			</footer>
+		</div>
+	</div>
+</body>
+
+</html>

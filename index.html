@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Humanity Death Game: Rock-Paper-Scissors Survival</title>
+	<link rel="stylesheet" href="styles.css" />
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'G-XXXXXXXXXX');  // ← Replace with your GA4 Measurement ID
+	</script>
+
+	<!-- Google AdSense Auto Ads -->
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6758111223171316"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<canvas id="fx"></canvas>
+	<div class="wrap">
+		<div class="card">
+			<h1 id="pageTitle">Humanity Death Game: Rock-Paper-Scissors Survival</h1>
+
+			<!-- Setup -->
+			<section id="screen-setup" class="screen active">
+				<p class="lead">
+					The fairest way for <b>only one human</b> to survive: a simultaneous global rock-paper-scissors.<br>
+					The round advances only when a decision is made; winners move on, and only those who keep winning remain.<br>
+					The victor is <i>the single luckiest human alive</i>.
+				</p>
+				<div class="panel" style="text-align:center">
+					<label for="population" class="muted">Initial Population</label><br>
+					<select id="population">
+						<option value="100">100</option>
+						<option value="10000">10,000</option>
+						<option value="1000000">1,000,000</option>
+						<option value="8000000000" selected>8,000,000,000 (Global)</option>
+					</select>
+					<div class="cta">
+						<button id="startBtn" class="primary" type="button">Start Game ▶</button>
+					</div>
+				</div>
+
+				<!-- Personal Best -->
+				<div class="panel" style="margin-top:16px">
+					<b>Personal Best</b>
+					<div class="row" style="margin-top:10px">
+						<div class="stat">
+							<b>Rank</b>
+							<div class="big" id="bestRankLbl">—</div>
+						</div>
+						<div class="stat">
+							<b>Best Round</b>
+							<div class="big" id="bestRoundLbl">—</div>
+						</div>
+						<div class="stat">
+							<b>Title</b>
+							<div class="big" id="badgeList">None</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Game -->
+			<section id="screen-game" class="screen">
+				<div class="panel" style="text-align:center;margin-bottom:18px">
+					<span class="muted">Current</span><br>
+					<span id="roundPill" class="big">Round: 0</span>
+				</div>
+
+				<div class="row">
+					<div class="stat">
+						<b>Remaining Rivals</b>
+						<div class="big"><span id="rivalsLbl" class="tick">-</span></div>
+						<div class="muted" id="halvesLbl">(Winning halves the rivals ⌊1/2⌋)</div>
+					</div>
+					<div class="stat">
+						<b>If You Lose Now: Final Rank</b>
+						<div class="big"><span id="rankPreviewLbl" class="tick">-</span></div>
+						<div class="muted">* Draws don’t change the count (round continues)</div>
+					</div>
+				</div>
+
+				<div class="cta" style="margin-top:24px">
+					<button class="hand" data-hand="Rock" type="button">✊ Rock</button>
+					<button class="hand" data-hand="Scissors" type="button">✌️ Scissors</button>
+					<button class="hand" data-hand="Paper" type="button">🖐 Paper</button>
+				</div>
+
+				<div class="muted" id="lastInfo" style="text-align:center;margin-top:12px"></div>
+			</section>
+
+			<!-- Victory -->
+			<section id="screen-victory" class="screen">
+				<div class="grid">
+					<div>
+						<div class="stat"><b>Title</b>
+							<div class="big"><span id="victoryTitle">World Champion!</span></div>
+						</div>
+						<div class="stat"><b>Final Rank</b>
+							<div class="big"><span id="victoryRankLbl">1</span></div>
+						</div>
+						<div class="stat"><b>Rounds Reached</b>
+							<div class="big"><span id="victoryRoundLbl">-</span></div>
+						</div>
+						<div class="stat"><b>Initial Population</b>
+							<div class="big"><span id="victoryTotalLbl">-</span></div>
+						</div>
+					</div>
+					<div>
+						<div class="result win" id="victoryNarrative" style="margin-top:4px"></div>
+						<div class="cta victory-cta">
+							<a class="hand" id="victoryShareBtn" href="#" target="_blank" rel="noopener"
+								style="text-decoration:none">Brag on X (Twitter)</a>
+							<button id="victoryRetryBtn" class="hand" type="button">Play Again</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Round Modal -->
+			<div id="modal" class="modal" aria-hidden="true">
+				<div class="box" style="text-align:center">
+					<h3 id="roundTitle" style="margin:2px 0 8px 0">Round Result</h3>
+					<div id="roundBanner" class="result draw" style="display:none"></div>
+					<div class="cta">
+						<button id="nextRoundBtn" class="primary" type="button" style="display:none">Next Round ▶</button>
+						<button id="toResultBtn" class="primary" type="button" style="display:none">To Result ▶</button>
+						<button id="toVictoryBtn" class="primary" type="button" style="display:none">To Victory Result ▶</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Result -->
+			<section id="screen-result" class="screen">
+				<div class="grid">
+					<div>
+						<div class="stat"><b>Final Rank</b>
+							<div class="big"><span id="finalRankLbl">-</span></div>
+						</div>
+						<div class="stat"><b>Rounds Reached</b>
+							<div class="big"><span id="reachRoundLbl">-</span></div>
+						</div>
+						<div class="stat"><b>Initial Population</b>
+							<div class="big"><span id="totalLbl">-</span></div>
+						</div>
+					</div>
+					<div>
+						<div class="result lose" id="finalNarrative" style="margin-top:4px"></div>
+						<div class="cta">
+							<a class="hand" id="shareBtn" href="#" target="_blank" rel="noopener"
+								style="text-decoration:none">Post on X (Twitter)</a>
+							<button id="retryBtn" class="hand" type="button">Play Again</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Footer -->
+			<footer class="muted" style="margin-top:28px;text-align:center;font-size:14px">
+				<a href="howto.html">How to Play</a> ｜
+				<a href="odds.html">Odds</a> ｜
+				<a href="privacy.html">Privacy Policy</a> ｜
+				<a href="terms.html">Terms of Service</a> ｜
+				<a href="about.html">About This Site</a>
+			</footer>
+		</div>
+	</div>
+
+	<script src="app.js"></script>
+</body>
+
+</html>
